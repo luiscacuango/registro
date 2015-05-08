@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PerfilViewDlg" widgetVar="PerfilViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPerfilTitle}">
+            <h:form id="PerfilViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{perfilController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPerfilLabel_idPerfil}"/>
+                        <h:outputText value="#{perfilController.selected.idPerfil}" title="#{bundle.ViewPerfilTitle_idPerfil}"/>
+                        <h:outputText value="#{bundle.ViewPerfilLabel_perDescri}"/>
+                        <h:outputText value="#{perfilController.selected.perDescri}" title="#{bundle.ViewPerfilTitle_perDescri}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PerfilViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
