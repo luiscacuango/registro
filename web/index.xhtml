@@ -2,39 +2,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>SISREG</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <title>Ingresar</title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
     </h:head>
     <h:body>
-        
-        <ui:composition template="./template.xhtml">
+        <div class="container" >
+            <h:form id="frmLogin" >
+                <p:growl id="growl" showDetail="true" life="3000"/>
+                <p:panel header="Inicio de sesión" >
+                    <h:panelGrid columns="2" cellpadding="5" >
+                        <p:outputLabel for="Correo" value="Correo:"/>
+                        <p:inputText value="#{usuarioController.email}" required="true"
+                                     id="Correo" label="Correo" requiredMessage="El correo es obligatorio"/>
+                        <p:outputLabel for="Contraseña" value="Contraseña:"></p:outputLabel>
+                        <p:password value="#{usuarioController.password}" required="true"
+                                    id="Contraseña" label="Contraseña" requiredMessage="La contraseña es obligatoria"/>
+                        <f:facet name="footer">
+                            <p:commandButton id="loginButton" value="Aceptar" update="frmLogin"
+                                             icon="ui-icon-person" action="#{usuarioController.rutaAdmin()}"
+                                             oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                        </f:facet>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+            <h:form id="frmRegistro" >
+                <p:panel header="Registro" >
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <h:outputLabel for="Nombre" value="Ingresa tu nombre" />
+                        <p:inputText value="#{usuarioController.nombre2}" required="true"
+                                     id="Nombre" label="Nombre" requiredMessage="El Nombre es obligatorio"/>
+                        <h:outputLabel for="Correo" value="Ingresa tu Correo"/>
+                        <p:password value="#{usuarioController.email2}" required="true"
+                                    id="Correo" label="Correo" requiredMessage="El Correo es obligatoria"/>
+                        <h:outputLabel for="Password" value="Ingresa tu contraseña"/>
+                        <p:password value="#{usuarioController.password2}" required="true"
+                                    id="Password" label="Password" requiredMessage="La Contraseña es obligatoria"/>
+                        <f:facet name="footer">
+                            <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" 
+                                             update="frmRegistro" oncomplete="handleLoginRequest(xhr, status, args)"/>
+                        </f:facet>
+                    </h:panelGrid>
+                </p:panel>
 
-            <ui:define name="title">
-                SISREG
-            </ui:define>
-
-            <ui:define name="body">
-                <h2>Bienvenido al Sistema de Registro</h2> 
-                <br />
-                <p:graphicImage style="alignment-adjust: central" id="imagen1" url="./resources/imagenes/CV.jpg"></p:graphicImage>
-                
-            </ui:define>
-
-            <ui:define name="footer">
-                <h:outputText value="#{bundle.Autor}"></h:outputText>
-            </ui:define>
-
-        </ui:composition>
-        
-        <!--br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="/paginas/perfil/List" value="Show All Perfil Items"/>
-        <br />
-        <h:link outcome="/paginas/usuario/List" value="Show All Usuario Items"/-->
-        
+            </h:form>
+        </div>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.loogedIn) {
+                    jQuery('#frmLogin').effect("shake", {times: 3}, 100);
+                } else {
+                    location.href = args.ruta;
+                }
+            }
+        </script>
     </h:body>
 </html>

@@ -21,7 +21,7 @@
                         <h:outputText value="#{bundle.ViewUsuarioLabel_usuPassword}"/>
                         <h:outputText value="#{usuarioController.selected.usuPassword}" title="#{bundle.ViewUsuarioTitle_usuPassword}"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_idPerfil}"/>
-                        <h:outputText value="#{usuarioController.selected.idPerfil}" title="#{bundle.ViewUsuarioTitle_idPerfil}"/>
+                        <h:outputText value="#{usuarioController.selected.idPerfil.perDescri}" title="#{bundle.ViewUsuarioTitle_idPerfil}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="UsuarioViewDialog.hide()"/>
                 </h:panelGroup>

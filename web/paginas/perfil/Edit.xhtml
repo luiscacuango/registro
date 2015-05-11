@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{perfilController.selected != null}">
                         <p:outputLabel value="#{bundle.EditPerfilLabel_idPerfil}" for="idPerfil" />
-                        <p:inputText id="idPerfil" value="#{perfilController.selected.idPerfil}" title="#{bundle.EditPerfilTitle_idPerfil}" required="true" requiredMessage="#{bundle.EditPerfilRequiredMessage_idPerfil}"/>
+                        <p:inputText id="idPerfil" style="visibility: hidden" value="#{perfilController.selected.idPerfil}" title="#{bundle.EditPerfilTitle_idPerfil}" required="true" requiredMessage="#{bundle.EditPerfilRequiredMessage_idPerfil}"/>
                         <p:outputLabel value="#{bundle.EditPerfilLabel_perDescri}" for="perDescri" />
                         <p:inputText id="perDescri" value="#{perfilController.selected.perDescri}" title="#{bundle.EditPerfilTitle_perDescri}" />
                     </p:panelGrid>

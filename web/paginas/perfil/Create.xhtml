@@ -12,8 +12,8 @@
             <h:form id="PerfilCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{perfilController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePerfilLabel_idPerfil}" for="idPerfil" />
-                        <p:inputText id="idPerfil" value="#{perfilController.selected.idPerfil}" title="#{bundle.CreatePerfilTitle_idPerfil}" required="true" requiredMessage="#{bundle.CreatePerfilRequiredMessage_idPerfil}"/>
+                        <p:outputLabel value="#{bundle.CreatePerfilLabel_idPerfil}" for="idPerfil"  />
+                        <p:inputText id="idPerfil" disabled="true" style="visibility: hidden" value="#{perfilController.selected.idPerfil}" title="#{bundle.CreatePerfilTitle_idPerfil}" required="true" requiredMessage="#{bundle.CreatePerfilRequiredMessage_idPerfil}"/>
                         <p:outputLabel value="#{bundle.CreatePerfilLabel_perDescri}" for="perDescri" />
                         <p:inputText id="perDescri" value="#{perfilController.selected.perDescri}" title="#{bundle.CreatePerfilTitle_perDescri}" />
                     </p:panelGrid>

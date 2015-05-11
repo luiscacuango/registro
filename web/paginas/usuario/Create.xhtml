@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_idUsuario}" for="idUsuario" />
-                        <p:inputText id="idUsuario" value="#{usuarioController.selected.idUsuario}" title="#{bundle.CreateUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idUsuario}"/>
+                        <p:inputText id="idUsuario" disabled="true" value="#{usuarioController.selected.idUsuario}" title="#{bundle.CreateUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idUsuario}"/>
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_usuNombre}" for="usuNombre" />
                         <p:inputText id="usuNombre" value="#{usuarioController.selected.usuNombre}" title="#{bundle.CreateUsuarioTitle_usuNombre}" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_usuCorreo}" for="usuCorreo" />
@@ -21,14 +21,15 @@
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_usuPassword}" for="usuPassword" />
                         <p:inputText id="usuPassword" value="#{usuarioController.selected.usuPassword}" title="#{bundle.CreateUsuarioTitle_usuPassword}" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_idPerfil}" for="idPerfil" />
-                        <p:selectOneMenu id="idPerfil" value="#{usuarioController.selected.idPerfil}" >
+                        <p:selectOneMenu id="idPerfil" value="#{usuarioController.selected.idPerfil}" required="true" requiredMessage="Seleccione un Perfil">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{perfilController.itemsAvailableSelectOne}"
                                            var="idPerfilItem"
-                                           itemValue="#{idPerfilItem}"/>
+                                           itemValue="#{idPerfilItem}" itemLabel="#{idPerfilItem.perDescri}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>
+                    <!--p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/-->
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -4,6 +4,8 @@ import entidades.Usuario;
 import controladores.util.JsfUtil;
 import controladores.util.JsfUtil.PersistAction;
 import beans.UsuarioFacade;
+import static com.sun.faces.facelets.util.Path.context;
+import java.awt.event.ActionEvent;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,12 +14,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "usuarioController")
 @SessionScoped
@@ -27,10 +31,98 @@ public class UsuarioController implements Serializable {
     private beans.UsuarioFacade ejbFacade;
     private List<Usuario> items = null;
     private Usuario selected;
+    private String email;
+    private String password;
+    private String nombre2;
+    private String email2;
+    private String password2;
 
     public UsuarioController() {
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getNombre2() {
+        return nombre2;
+    }
+
+    public void setNombre2(String nombre2) {
+        this.nombre2 = nombre2;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public void setEmail2(String email2) {
+        this.email2 = email2;
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+
+    
+    public String rutaAdmin(){
+        String ruta = "template.xhtml";
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.addCallbackParam("ruta", ruta);
+        return ruta;
+    }
+    
+//    public String login() {
+//        RequestContext context = RequestContext.getCurrentInstance();
+//        FacesMessage message = null;
+//        boolean loggedIn = false;
+//        String ruta = "";
+//        Usuario correo = ejbFacade.findByUsuCorreo(selected.getUsuCorreo());
+//        System.out.println("email ingresado --->>> " + email);
+//        try {
+//            if (correo != null) {
+//                if (correo.getUsuPassword() != null && correo.getUsuPassword().equals(selected.getUsuPassword()) && correo.getIdPerfil().getIdPerfil().equals(1)) {
+//                    loggedIn = true;
+//                    String user = correo.getUsuNombre();
+//                    message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", user);
+//                    ruta = "index.xhtml";
+//                } else {
+//                    message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de ingreso!", "Contraseña Incorrecta!");
+//                }
+//            } else {
+//                loggedIn = false;
+//                message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de ingreso!", "Usuario Incorrecto!");
+//                if (selected == null) {
+//                    selected = new Usuario();
+//                }
+//            }
+//
+//            FacesContext.getCurrentInstance().addMessage(null, message);
+//            context.addCallbackParam("loggedIn", loggedIn);
+//            context.addCallbackParam("ruta", ruta);
+//
+//        } catch (Exception e) {
+//            System.out.println("Error --------> " + e.getMessage());
+//        }
+//        return ruta;
+//    }
+    
     public Usuario getSelected() {
         return selected;
     }

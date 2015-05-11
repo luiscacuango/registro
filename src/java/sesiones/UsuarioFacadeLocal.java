@@ -28,6 +28,8 @@ public interface UsuarioFacadeLocal {
 
     List<Usuario> findRange(int[] range);
 
+//    public String rutaAdmin();
+
     int count();
     
 }
