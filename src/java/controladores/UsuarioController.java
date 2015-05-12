@@ -4,9 +4,6 @@ import entidades.Usuario;
 import controladores.util.JsfUtil;
 import controladores.util.JsfUtil.PersistAction;
 import beans.UsuarioFacade;
-import static com.sun.faces.facelets.util.Path.context;
-import java.awt.event.ActionEvent;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -31,60 +28,17 @@ public class UsuarioController implements Serializable {
     private beans.UsuarioFacade ejbFacade;
     private List<Usuario> items = null;
     private Usuario selected;
-    private String email;
-    private String password;
-    private String nombre2;
-    private String email2;
-    private String password2;
 
     public UsuarioController() {
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNombre2() {
-        return nombre2;
-    }
-
-    public void setNombre2(String nombre2) {
-        this.nombre2 = nombre2;
-    }
-
-    public String getEmail2() {
-        return email2;
-    }
-
-    public void setEmail2(String email2) {
-        this.email2 = email2;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-    }
-
-    
     public String rutaAdmin(){
-        String ruta = "template.xhtml";
         RequestContext context = RequestContext.getCurrentInstance();
+        Usuario email2 = ejbFacade.findByUsuCorreo(selected.getUsuCorreo());
+        System.out.println("email2 --->>> " + email2);
+        String ruta = "template.xhtml";
         context.addCallbackParam("ruta", ruta);
+        System.out.println("ruta ingresada --->>> " + ruta);
         return ruta;
     }
     
