@@ -32,15 +32,6 @@ public class UsuarioController implements Serializable {
     public UsuarioController() {
     }
 
-    public String rutaAdmin(){
-        RequestContext context = RequestContext.getCurrentInstance();
-        Usuario email2 = ejbFacade.findByUsuCorreo(selected.getUsuCorreo());
-        System.out.println("email2 --->>> " + email2);
-        String ruta = "template.xhtml";
-        context.addCallbackParam("ruta", ruta);
-        System.out.println("ruta ingresada --->>> " + ruta);
-        return ruta;
-    }
     
 //    public String login() {
 //        RequestContext context = RequestContext.getCurrentInstance();
@@ -102,10 +93,21 @@ public class UsuarioController implements Serializable {
     }
 
     public void create() {
+        System.out.println("selected.getUsuCorreo() ----->>" + selected.getUsuCorreo());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }
+    
+    public void rutaAdmin(){
+        prepareCreate();
+        RequestContext context = RequestContext.getCurrentInstance();
+        //Usuario email2 = ejbFacade.findByUsuCorreo(selected.getUsuCorreo());
+        System.out.println("selected.getUsuCorreo() --->>> " + selected.getUsuCorreo());
+        String ruta = "template.xhtml";
+        context.addCallbackParam("ruta", ruta);
+        System.out.println("ruta ingresada --->>> " + ruta);
     }
 
     public void update() {

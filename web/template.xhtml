@@ -16,14 +16,16 @@
         <p:growl id="growl" life="3000" />
 
         <p:layout fullPage="false">
-           
-
-            <p:layoutUnit position="center" size="60">
-                <ui:insert name="footer"/>
+            <p:layoutUnit position="north" size="60">
+                <ui:insert name="north"/>
             </p:layoutUnit>
 
             <p:layoutUnit position="center">
                 <ui:insert name="body"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" size="60">
+                <ui:insert name="footer"/>
             </p:layoutUnit>
 
         </p:layout>

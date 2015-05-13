@@ -8,27 +8,9 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="body">
-            <h:form id="frmLogin" >
-                <p:growl id="growl" showDetail="true" life="3000"/>
-                <p:panel header="Inicio de sesión" >
-                    <h:panelGrid columns="2" cellpadding="5" >
-                        <p:outputLabel for="Correo" value="Correo:"/>
-                        <p:inputText value="#{usuarioController.selected.usuCorreo}" required="true"
-                                     id="Correo" label="Correo" requiredMessage="El correo es obligatorio"/>
-                        <p:outputLabel for="Contraseña" value="Contraseña:"></p:outputLabel>
-                        <p:password value="#{usuarioController.selected.usuPassword}" required="true"
-                                    id="Contraseña" label="Contraseña" requiredMessage="La contraseña es obligatoria"/>
-                        <f:facet name="footer">
-                            <p:commandButton id="loginButton" value="Aceptar" update="frmLogin"
-                                             icon="ui-icon-person" action="#{usuarioController.rutaAdmin()}"
-                                             oncomplete="handleLoginRequest(xhr, status, args)"/>  
-                        </f:facet>
-                    </h:panelGrid>
-                </p:panel>
-            </h:form>
-
+            
             <h:form id="UsuarioListForm">
-                <p:panel header="REGISTRAR USUARIOS">
+                <p:panel header="SISTEMA DE LOGIN Y REGISTRO">
                     <p:dataTable id="datalist" value="#{usuarioController.items}" var="item"
                                  selectionMode="single" selection="#{usuarioController.selected}"
                                  paginator="true"
@@ -67,23 +49,14 @@
                             <h:outputText value="#{item.idPerfil.perDescri}"/>
                         </p:column>
                         <f:facet name="footer">
+                            <p:commandButton id="loginButton" icon="ui-icon-plus"   value="Login" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioLoginForm" oncomplete="PF('UsuarioLoginDialog').show()"/>
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="Registrar" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
-
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
             <ui:include src="Create.xhtml"/>
-
-            <script type="text/javascript">
-                function handleLoginRequest(xhr, status, args) {
-                    if (args.validationFailed || !args.loogedIn) {
-                        jQuery('#frmLogin').effect("shake", {times: 3}, 100);
-                    } else {
-                        location.href = args.ruta;
-                    }
-                }
-            </script>
+            <ui:include src="Login.xhtml"/>
         </ui:define>
     </ui:composition>
 
