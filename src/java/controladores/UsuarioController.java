@@ -32,42 +32,6 @@ public class UsuarioController implements Serializable {
     public UsuarioController() {
     }
 
-    
-//    public String login() {
-//        RequestContext context = RequestContext.getCurrentInstance();
-//        FacesMessage message = null;
-//        boolean loggedIn = false;
-//        String ruta = "";
-//        Usuario correo = ejbFacade.findByUsuCorreo(selected.getUsuCorreo());
-//        System.out.println("email ingresado --->>> " + email);
-//        try {
-//            if (correo != null) {
-//                if (correo.getUsuPassword() != null && correo.getUsuPassword().equals(selected.getUsuPassword()) && correo.getIdPerfil().getIdPerfil().equals(1)) {
-//                    loggedIn = true;
-//                    String user = correo.getUsuNombre();
-//                    message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", user);
-//                    ruta = "index.xhtml";
-//                } else {
-//                    message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de ingreso!", "Contraseña Incorrecta!");
-//                }
-//            } else {
-//                loggedIn = false;
-//                message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de ingreso!", "Usuario Incorrecto!");
-//                if (selected == null) {
-//                    selected = new Usuario();
-//                }
-//            }
-//
-//            FacesContext.getCurrentInstance().addMessage(null, message);
-//            context.addCallbackParam("loggedIn", loggedIn);
-//            context.addCallbackParam("ruta", ruta);
-//
-//        } catch (Exception e) {
-//            System.out.println("Error --------> " + e.getMessage());
-//        }
-//        return ruta;
-//    }
-    
     public Usuario getSelected() {
         return selected;
     }
@@ -93,21 +57,46 @@ public class UsuarioController implements Serializable {
     }
 
     public void create() {
-        System.out.println("selected.getUsuCorreo() ----->>" + selected.getUsuCorreo());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
-    public void rutaAdmin(){
-        prepareCreate();
+
+    public String login() {
         RequestContext context = RequestContext.getCurrentInstance();
-        //Usuario email2 = ejbFacade.findByUsuCorreo(selected.getUsuCorreo());
-        System.out.println("selected.getUsuCorreo() --->>> " + selected.getUsuCorreo());
-        String ruta = "template.xhtml";
-        context.addCallbackParam("ruta", ruta);
-        System.out.println("ruta ingresada --->>> " + ruta);
+        FacesMessage message = null;
+        boolean loggedIn = false;
+        String ruta = "";
+        Usuario correo = ejbFacade.findByUsuCorreo(selected.getUsuCorreo());
+        String user = correo.getUsuNombre();
+        
+        try {
+            if (correo != null) {
+                if (correo.getUsuPassword() != null && correo.getUsuPassword().equals(selected.getUsuPassword()) && correo.getIdPerfil().getIdPerfil().equals(1)) {
+                    loggedIn = true;
+                    message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", correo.getUsuNombre());
+                    System.out.println("corre.getIdPerfil().getIdPerfil() -->> " + correo.getIdPerfil().getIdPerfil());
+                    ruta = "template.xhtml";
+                } else {
+                    message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error de ingreso!", "Contraseña Incorrecta!");
+                }
+            } else {
+                loggedIn = false;
+                message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de ingreso!", "Usuario Incorrecto!");
+                if (selected == null) {
+                    selected = new Usuario();
+                }
+            }
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            context.addCallbackParam("loggedIn", loggedIn);
+            context.addCallbackParam("ruta", ruta);
+
+        } catch (Exception e) {
+            System.out.println("Error --------> " + e.getMessage());
+        }
+        return ruta;
     }
 
     public void update() {

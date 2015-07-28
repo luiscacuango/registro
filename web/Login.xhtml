@@ -20,9 +20,9 @@
                                     id="Contraseña" label="Contraseña" requiredMessage="La contraseña es obligatoria"/>
                         <f:facet name="footer">
                             <p:commandButton id="loginButton" value="Aceptar1" update="UsuarioLoginForm"
-                                             icon="ui-icon-person" action="#{usuarioController.rutaAdmin()}"
+                                             icon="ui-icon-person" action="#{usuarioController.login}"
                                              oncomplete="handleLoginRequest(xhr, status, args)"/>  
-                            <p:commandButton actionListener="#{usuarioController.rutaAdmin}" value="Aceptar2" 
+                            <p:commandButton actionListener="#{usuarioController.login}" value="Aceptar2" 
                                              update="display,:UsuarioListForm:datalist,:growl" 
                                              oncomplete="handleSubmit(args,'UsuarioLoginDialog');"/>
                         </f:facet>
